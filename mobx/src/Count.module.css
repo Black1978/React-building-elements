@@ -1,0 +1,24 @@
+.buttons {
+  padding: 10px;
+  color: white;
+  background-color: teal;
+  font-size: 2rem;
+  border: 0;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 -5px;
+}
+.item {
+  flex: 1 1 auto;
+  margin: 0 5px;
+}
+.customer {
+  border: solid 1px bisque;
+  padding: 10px;
+  margin: 5px 0 10px;
+}

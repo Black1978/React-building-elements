@@ -1,0 +1,15 @@
+.itemQuantity {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.productItem {
+    border: 1px solid red;
+    width: max-content;
+    margin: 10px;
+    padding: 10px;
+}
+.disabled {
+    cursor: not-allowed;
+}

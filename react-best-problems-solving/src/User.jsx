@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -8,20 +9,35 @@ function User() {
     const id = useLocation().pathname.split('/')[2]
 
     useEffect(() => {
-        const controller = new AbortController()
-        const signal = controller.signal
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`, { signal })
-            .then((res) => res.json())
-            .then((data) => {
-                setUser(data)
+        // const controller = new AbortController()
+        // const signal = controller.signal
+        // fetch(`https://jsonplaceholder.typicode.com/users/${id}`, { signal })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         setUser(data)
+        //     })
+        //     .catch((err) => {
+        //         if (err.name === 'AbortError') {
+        //             console.log('canseled!')
+        //         }
+        //     })
+        // return () => {
+        //     controller.abort()
+        // }
+        const cancelToken = axios.CancelToken.source()
+        axios
+            .get(`https://jsonplaceholder.typicode.com/users/${id}`, {
+                cancelToken: cancelToken.token,
             })
+            .then((res) => res.data)
+            .then((data) => setUser(data))
             .catch((err) => {
-                if (err.name === 'AbortError') {
-                    console.log('canseled!')
+                if (axios.isCancel(err)) {
+                    console.log('cancelled!')
                 }
             })
         return () => {
-            controller.abort()
+            cancelToken.cancel()
         }
     }, [id])
     return (

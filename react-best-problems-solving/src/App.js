@@ -1,6 +1,7 @@
 import './App.css'
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function App() {
     const [products, setProducts] = useState([
@@ -39,31 +40,40 @@ function App() {
     console.log('re-rendering')
     return (
         <div>
-            <h3>All products</h3>
-            {products.map((item) => {
-                return (
-                    <div key={item.id} className='productItem'>
-                        <span>
-                            {item.title}{' '}
-                            <button onClick={() => handleChoose(item.id)}>Choosen</button>
-                        </span>
-                        <div className='itemQuantity'>
-                            <button
-                                className={0 >= item.quantity && 'disabled'}
-                                onClick={() => handleDeacreament(item.id)}
-                                disabled={0 >= item.quantity}
-                            >
-                                -
-                            </button>
-                            <span>{item.quantity}</span>
-                            <button onClick={() => handleIncreament(item.id)}>+</button>
+            <div style={{ border: 'solid red 5px', margin: '10px', padding: '10px' }}>
+                <h2 style={{ textDecoration: 'underline' }}>useState bind solution</h2>
+                <h3>All products</h3>
+                {products.map((item) => {
+                    return (
+                        <div key={item.id} className='productItem'>
+                            <span>
+                                {item.title}{' '}
+                                <button onClick={() => handleChoose(item.id)}>Choosen</button>
+                            </span>
+                            <div className='itemQuantity'>
+                                <button
+                                    className={0 >= item.quantity && 'disabled'}
+                                    onClick={() => handleDeacreament(item.id)}
+                                    disabled={0 >= item.quantity}
+                                >
+                                    -
+                                </button>
+                                <span>{item.quantity}</span>
+                                <button onClick={() => handleIncreament(item.id)}>+</button>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
-            <h3>Selected products</h3>
-            <span>{selectedGood?.title}</span>
-            <span>{selectedGood?.quantity}</span>
+                    )
+                })}
+                <h3>Selected products</h3>
+                <span>{selectedGood?.title}</span>
+                <span>{selectedGood?.quantity}</span>
+            </div>
+            <div style={{ border: 'solid red 5px', margin: '10px', padding: '10px' }}>
+                <h2 style={{ textDecoration: 'underline' }}>
+                    use AbortController (useEffect interruption)
+                </h2>
+                <Link to={'/user'}>User</Link>
+            </div>
         </div>
     )
 }
